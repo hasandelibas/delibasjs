@@ -148,7 +148,7 @@ String.prototype.matchRequirsive = function(start,end,position){
  * @param start 
  * @param length 
  */
-String.prototype.pop = function (this, start, length) {
+String.prototype.pop = function (start, length) {
 	return this.substr(0,start) + this.substr(start+length);
 }
 
