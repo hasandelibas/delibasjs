@@ -558,7 +558,7 @@ function OnAdded(selector,process,order){}
 		triggers.push({selector,process,order});
 	}
 
-	OnReady(()=>{
+  document.addEventListener('DOMContentLoaded', function() {
 		function Check(nodes){
       for( const node of nodes ){
         for( const trigger of triggers ){
@@ -587,8 +587,8 @@ function OnAdded(selector,process,order){}
 			subtree:true
 		});
 		Check(document.body);
-	},-100);
-
+	})
+		
 	
 })()
 
