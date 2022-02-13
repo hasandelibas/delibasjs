@@ -613,7 +613,7 @@ function OnChildAdded(element,selector, process) {}
 	window.OnChildAdded = function (element,selector, process ) {
 		function Check(nodes) {
 			for (const node of nodes) {
-				if(node instanceof HTMLElement){
+				if(node.nodeType===Node.ELEMENT_NODE){
 					if (node.matches(selector)) process.apply(node, [node]);
 					if (node.querySelectorAll(selector).length > 0) {
 						for (const el of node.querySelectorAll(selector)) {
@@ -677,7 +677,7 @@ function OnAdded(selector, process, order) {}
 	document.addEventListener('DOMContentLoaded', function () {
 		function Check(nodes) {
 			for (const node of nodes) {
-				if(node instanceof HTMLElement){
+				if(node.nodeType===Node.ELEMENT_NODE){
 					for (const trigger of triggers) {
 						let selector = trigger.selector;
 						if (node.matches(selector)) trigger.process.apply(node, [node]);
