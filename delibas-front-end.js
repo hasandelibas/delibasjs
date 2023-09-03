@@ -103,47 +103,57 @@ String.prototype.trimQuotes = function () {
 };
 
 
-/**
- * Search requirsively charcater, if found: return
- * * [0] : start + founded + end
- * * [1] : founded
- * * [2] : start index
- * * [3] : end index
- * @param start start character ( { [
- * @param end end character ) } ]
- * @param position start position search
- */
-String.prototype.matchRequirsive = function (start, end, position) {
-	var search = this;
-	var total = 0,
-		startLen = start.length,
-		endLen = end.length;
-	var startPoint = -1;
-	for (let i = position; i < search.length - endLen + 1; i++) {
-		const element = search[i];
-		//console.log(i,element,total,startPoint);
-		if (search.substr(i, startLen) == start) {
-			//console.log("S:",i)
-			total++;
-			if (startPoint == -1) startPoint = i;
-			i += startLen - 1;
-		}
-		if (search.substr(i, endLen) == end) {
-			//console.log("E:",i)
-			total--;
-			if (total == 0 && startPoint != -1) {
-				return [
-					search.substr(startPoint, i + endLen - startPoint),
-					search.substr(startPoint + startLen, i - startPoint - startLen),
-					startPoint + startLen,
-					i + endLen
-				];
-			}
-			i += endLen - 1;
-		}
-	}
-	return null;
-}
+
+  /**
+   * Search requirsively charcater, if found: return
+   * * [0] : start + founded + end
+   * * [1] : founded
+   * * [2] : start index
+   * * [3] : end index
+   * @param start start character ( { [
+   * @param end end character ) } ]
+   * @param position start position search
+   */
+  String.prototype.matchRequirsive = function (start, end, position=0) {
+    var search = this;
+    var total = 0,
+      startLen = start.length,
+      endLen = end.length;
+    var startPoint = -1;
+    for (let i = position; i < search.length - endLen + 1; i++) {
+      const element = search.substr(i, startLen);
+      console.log(i,element,total,startPoint);
+      
+      if (search.substr(i, startLen) == start ) {
+        //console.log("S:",i)
+        total++;
+        if(start==end && total==2){
+          return [
+            search.substr(startPoint, i + endLen - startPoint),
+            search.substr(startPoint + startLen, i - startPoint - startLen),
+            startPoint + startLen,
+            i + endLen
+          ];
+        }
+        if (startPoint == -1) startPoint = i;
+        i += startLen - 1;
+        
+      }else if (search.substr(i, endLen) == end) {
+        //console.log("E:",i)
+        total--;
+        if (total == 0 && startPoint != -1) {
+          return [
+            search.substr(startPoint, i + endLen - startPoint),
+            search.substr(startPoint + startLen, i - startPoint - startLen),
+            startPoint + startLen,
+            i + endLen
+          ];
+        }
+        i += endLen - 1;
+      }
+    }
+    return null;
+  }
 
 
 /**
