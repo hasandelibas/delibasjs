@@ -122,7 +122,6 @@ String.prototype.trimQuotes = function () {
     var startPoint = -1;
     for (let i = position; i < search.length - endLen + 1; i++) {
       const element = search.substr(i, startLen);
-      console.log(i,element,total,startPoint);
       
       if (search.substr(i, startLen) == start ) {
         //console.log("S:",i)
